@@ -1,3 +1,5 @@
+
+
 import { useState } from "react";
 
 const disorders = [
@@ -86,18 +88,20 @@ export default function Education() {
   const [selectedTab, setSelectedTab] = useState("osa");
 
   return (
-    <div className="space-y-8 p-6">
-      <h1 className="text-3xl font-bold">Sleep Education</h1>
+    <div className="min-h-screen p-4 sm:p-6 md:p-8 bg-gradient-to-b  to-slate-800">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+        Sleep Education
+      </h1>
 
       {/* Tabs */}
-      <div className="flex space-x-4 border-b">
+      <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 mb-6 sm:mb-8">
         {disorders.map((disorder) => (
           <button
             key={disorder.id}
-            className={`px-4 py-2 font-medium ${
+            className={`px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-medium transition-all text-sm sm:text-base w-full sm:w-auto ${
               selectedTab === disorder.id
-                ? "border-b-2 border-blue-500 text-blue-600"
-                : "text-gray-500 hover:text-gray-700"
+                ? "bg-gradient-to-r from-indigo-500 to-cyan-500 text-white shadow-lg"
+                : "bg-slate-700/50 text-slate-300 hover:bg-slate-700/70 hover:text-white"
             }`}
             onClick={() => setSelectedTab(disorder.id)}
           >
@@ -107,11 +111,11 @@ export default function Education() {
       </div>
 
       {/* Content */}
-      <div>
+      <div className="space-y-6 sm:space-y-8">
         {disorders.map(
           (disorder) =>
             selectedTab === disorder.id && (
-              <div key={disorder.id} className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div key={disorder.id} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 <DisorderInfo title="Symptoms" items={disorder.content.symptoms} />
                 <DisorderInfo title="Causes" items={disorder.content.causes} />
                 <DisorderInfo title="Treatment" items={disorder.content.treatment} />
@@ -125,11 +129,20 @@ export default function Education() {
 
 function DisorderInfo({ title, items }) {
   return (
-    <div className="p-6 bg-white shadow-lg rounded-lg border">
-      <h2 className="text-xl font-semibold mb-4">{title}</h2>
-      <ul className="list-disc pl-6 space-y-2 text-gray-700">
+    <div className="p-4 md:p-6 bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700 shadow-xl">
+      <h2 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-slate-200">
+        <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+          {title}
+        </span>
+      </h2>
+      <ul className="space-y-2 md:space-y-3">
         {items.map((item, index) => (
-          <li key={index}>{item}</li>
+          <li 
+            key={index}
+            className="flex items-start text-sm md:text-base text-slate-300 before:content-['•'] before:text-cyan-400 before:mr-2 md:before:mr-3 before:mt-1"
+          >
+            {item}
+          </li>
         ))}
       </ul>
     </div>

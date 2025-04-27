@@ -1,1 +1,9 @@
 server
+frontend.zip
+model_EDS.keras
+model_healthy.keras
+model_osa.keras
+model_snoring.keras
+pca_reduced.pkl
+scaler.pkl
+model.h5
